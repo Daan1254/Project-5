@@ -12,7 +12,7 @@ export default function LoginContainer() {
                 <Input label={'Username'} required={false}/>
                 <Input label={'Password'} required={false}/>
 
-                <Button text={'Login'}/>
+                <Button text={'Login'} disabled={false} onClickHandler={() => {console.log('hoi')}}/>
             </div>
         </div>
     )

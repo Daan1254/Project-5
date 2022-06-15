@@ -1,8 +1,8 @@
 import '../styles/Main.css';
 
-export default function Button({text, disabled}) {
+export default function Button({text, disabled, onClickHandler }) {
     return (
-        <div className={disabled? "btn btn-disabled" : "btn"}>
+        <div onClick={onclick} className={disabled? "btn btn-disabled" : "btn"}>
             {text}
         </div>
     )
