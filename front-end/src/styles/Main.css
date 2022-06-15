@@ -1,0 +1,47 @@
+/*INPUT CSS*/
+
+.Input {
+    width: 100%;
+    border: 1px solid #333;
+    border-radius: 5px;
+    padding: 5px;
+}
+
+
+.input-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: max-content;
+    margin-top: 15px;
+}
+
+.input-label {
+    font-size: .8rem;
+}
+
+.input-required {
+    color: dodgerblue;
+}
+
+
+
+
+/*Button CSS*/
+
+.btn {
+    width: 100%;
+    font-size: .9rem;
+    text-align: center;
+    margin-top: 10vh;
+    background-color: dodgerblue;
+    color: white;
+    border-radius: 2px;
+    padding: 10px 20px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.btn-disabled {
+    cursor: not-allowed;
+}
