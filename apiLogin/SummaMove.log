@@ -1,0 +1,74 @@
+[2022-06-02T10:21:28.000] [DEBUG] login - Database connection established
+[2022-06-02T10:23:34.987] [DEBUG] login - Database connection established
+[2022-06-02T10:26:18.879] [DEBUG] login - Database connection established
+[2022-06-02T10:26:26.577] [DEBUG] login - user requested all Users
+[2022-06-02T10:26:54.675] [DEBUG] login - login succes
+[2022-06-02T10:26:54.923] [DEBUG] login - user requested all Vehicles
+[2022-06-02T10:51:37.099] [DEBUG] login - login succes
+[2022-06-02T10:51:37.334] [DEBUG] login - user requested all Vehicles
+[2022-06-02T10:51:43.481] [DEBUG] login - user requested data of an vehicle succesfull | id: 10
+[2022-06-02T10:51:48.923] [DEBUG] login - user updated data of an vehicle succesfull | id: undefined
+[2022-06-02T10:51:48.948] [DEBUG] login - user requested all Vehicles
+[2022-06-02T10:51:52.272] [DEBUG] login - user deleted an vehicle succesfull | id: 10
+[2022-06-02T10:51:52.299] [DEBUG] login - user requested all Vehicles
+[2022-06-02T10:52:03.153] [DEBUG] login - user added an vehicle succesfull
+[2022-06-02T10:52:03.180] [DEBUG] login - user requested all Vehicles
+[2022-06-02T10:53:44.193] [DEBUG] login - Database connection established
+[2022-06-02T10:53:53.291] [DEBUG] login - login succes
+[2022-06-02T10:53:53.530] [DEBUG] login - user requested all Vehicles
+[2022-06-02T10:55:23.051] [DEBUG] login - login succes
+[2022-06-02T10:55:23.297] [DEBUG] login - user requested all Vehicles
+[2022-06-02T10:57:23.145] [DEBUG] login - login succes
+[2022-06-02T10:57:23.379] [DEBUG] login - user requested all Vehicles
+[2022-06-02T10:58:54.285] [DEBUG] login - Database connection established
+[2022-06-02T10:59:11.300] [DEBUG] login - login succes
+[2022-06-02T10:59:11.541] [DEBUG] login - user requested all Vehicles
+[2022-06-02T11:02:11.672] [DEBUG] login - login succes
+[2022-06-02T11:02:11.914] [DEBUG] login - user requested all Vehicles
+[2022-06-02T11:02:31.299] [DEBUG] login - login succes
+[2022-06-02T11:02:31.536] [DEBUG] login - user requested all Vehicles
+[2022-06-02T11:02:55.678] [DEBUG] login - Database connection established
+[2022-06-02T11:03:03.087] [DEBUG] login - login succes
+[2022-06-02T11:03:03.341] [DEBUG] login - user requested all Vehicles
+[2022-06-02T11:04:15.097] [DEBUG] login - Database connection established
+[2022-06-02T11:04:25.489] [DEBUG] login - login succes
+[2022-06-02T11:05:27.139] [DEBUG] login - login succes
+[2022-06-02T11:05:27.377] [DEBUG] login - user requested all Vehicles
+[2022-06-02T11:07:34.803] [DEBUG] login - login succes
+[2022-06-02T11:07:35.049] [DEBUG] login - user requested all Vehicles
+[2022-06-02T11:08:15.629] [DEBUG] login - login succes
+[2022-06-02T11:08:15.864] [DEBUG] login - user requested all Vehicles
+[2022-06-02T11:09:15.380] [DEBUG] login - login succes
+[2022-06-02T11:09:15.621] [DEBUG] login - user requested all Vehicles
+[2022-06-02T11:11:40.592] [DEBUG] login - Database connection established
+[2022-06-02T11:11:47.187] [DEBUG] login - login succes
+[2022-06-02T11:11:47.432] [DEBUG] login - user requested all Vehicles
+[2022-06-02T11:11:48.199] [DEBUG] login - user requested data of an vehicle succesfull | id: 11
+[2022-06-02T11:18:06.176] [DEBUG] login - Database connection established
+[2022-06-02T11:18:20.786] [DEBUG] login - login succes
+[2022-06-02T11:18:21.023] [DEBUG] login - user requested all Vehicles
+[2022-06-02T11:18:21.981] [DEBUG] login - user requested data of an vehicle succesfull | id: 11
+[2022-06-02T11:18:57.441] [DEBUG] login - login succes
+[2022-06-02T11:18:57.685] [DEBUG] login - user requested all Vehicles
+[2022-06-02T11:18:59.911] [DEBUG] login - user requested data of an vehicle succesfull | id: 11
+[2022-06-02T11:19:03.854] [DEBUG] login - user updated data of an vehicle succesfull | id: undefined
+[2022-06-02T11:19:03.878] [DEBUG] login - user requested all Vehicles
+[2022-06-02T11:19:06.580] [DEBUG] login - user deleted an vehicle succesfull | id: 11
+[2022-06-02T11:22:52.154] [DEBUG] login - login succes
+[2022-06-02T11:22:52.405] [DEBUG] login - user requested all Vehicles
+[2022-06-02T11:22:53.194] [DEBUG] login - user deleted an vehicle succesfull | id: 9
+[2022-06-02T11:23:14.875] [DEBUG] login - Database connection established
+[2022-06-02T11:23:19.686] [DEBUG] login - login succes
+[2022-06-02T11:23:19.926] [DEBUG] login - user requested all Vehicles
+[2022-06-02T11:23:40.918] [DEBUG] login - login succes
+[2022-06-02T11:23:41.151] [DEBUG] login - user requested all Vehicles
+[2022-06-02T11:23:42.444] [DEBUG] login - user deleted an vehicle succesfull | id: 12
+[2022-06-02T11:23:42.474] [DEBUG] login - user requested all Vehicles
+[2022-06-02T11:24:27.823] [DEBUG] login - user added an vehicle succesfull
+[2022-06-02T11:24:27.851] [DEBUG] login - user requested all Vehicles
+[2022-06-02T11:24:31.205] [DEBUG] login - user requested data of an vehicle succesfull | id: 13
+[2022-06-02T11:24:35.405] [DEBUG] login - user updated data of an vehicle succesfull | id: undefined
+[2022-06-02T11:24:35.439] [DEBUG] login - user requested all Vehicles
+[2022-06-02T11:25:28.545] [DEBUG] login - login succes
+[2022-06-02T11:25:28.777] [DEBUG] login - user requested all Vehicles
+[2022-06-02T11:25:31.293] [DEBUG] login - user requested data of an vehicle succesfull | id: 13
