@@ -1,0 +1,76 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'ios';
+    overflow: hidden;
+}
+
+@font-face {
+    font-family: "ios";
+    src: url("../fonts/SF-UI-Display-Regular.otf");
+}
+
+
+
+/* NOTIFY */
+
+.notify {
+    position: absolute;
+    right: -25%;
+    top: 10vh;
+    width: 30vh;
+    height: 10vh;
+
+
+    display: flex;
+    align-items: center;
+    color: white;
+    overflow: hidden;
+}
+
+.succes {
+    background-color: rgb(3, 207, 3);
+}
+
+.loading-succes {
+    background-color: green;
+}
+
+.error {
+    background-color: red;
+}
+
+.loading-error {
+    background-color: rgb(161, 7, 7);
+}
+
+.info {
+    background-color: rgb(9, 155, 203);
+}
+
+.loading-info {
+    background-color: rgb(5, 124, 157);
+}
+.notify-loadingbar {
+    width: 0%;
+    position: absolute;
+    bottom: 0;
+    height: 4px;
+    animation: notify-loadinganim forwards 5s;
+}
+
+@keyframes notify-loadinganim {
+    from {
+        width: 0%;
+    }
+
+    to {
+        width: 100%;
+    }
+}
+
+.notify > i {
+    padding: 2vh;
+}
+
