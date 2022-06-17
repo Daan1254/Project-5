@@ -1,4 +1,6 @@
 
+let acces_token;
+
 $(".btn").click(() => {
     let username = $("#login-user").val()
     let password = $("#login-pass").val()
@@ -6,7 +8,11 @@ $(".btn").click(() => {
 
     tryLogin(username, password, (statement) => {
         if (statement) {
-            notify('succes', "Login Succes", 2500)
+            notify("succes", "Login succes", 5000)
+            $(".container").fadeOut(250, () => {
+                $(".dashboard-container").fadeIn(250)
+                loadExercises()
+            })
         } else {
             notify('error', "Login gefaald", 2500)
         }
@@ -28,7 +34,10 @@ const tryLogin = async (username, password, callback) => {
         )
     })
 
+
     if (response.status === 200) {
+        let json = await response.json()
+        acces_token = json.acces_token
         callback(true)
     } else {
         callback(false)

@@ -20,8 +20,8 @@ SET time_zone = "+00:00";
 --
 -- Database: `summamove`
 --
-CREATE DATABASE IF NOT EXISTS `summamove` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
-USE `summamove`;
+CREATE DATABASE IF NOT EXISTS `s3192_DaanApi` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
+USE `s3192_DaanApi`;
 
 -- --------------------------------------------------------
 

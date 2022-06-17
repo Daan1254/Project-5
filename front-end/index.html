@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Summa Move</title>
+    <link rel="stylesheet" href="./styles/login.css">
+    <link rel="stylesheet" href="./styles/main.css">
+    <link rel="stylesheet" href="./styles/dashboard.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+    <div class='container'>
+        <div class="login-container">
+            <div class='login-title'>SummaMove Login</div>
+
+            <div class="login-input-container">
+                <div class='input-container'>
+                    <label class='input-label'>Gebruikersnaam <span class='input-required'>*</span> </label>
+                    <input id="login-user" type="text" placeholder="Gebruikersnaam..." class="Input"/>
+                </div>
+                <div class='input-container'>
+                    <label class='input-label'>Wachtwoord <span class='input-required'>*</span> </label>
+                    <input id="login-pass" type="text" placeholder="Wachtwoord..." class="Input"/>
+                </div>
+                <div class="btn" >
+                    Inloggen
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="dashboard-container">
+        <div class="dashboard-header">
+            <img src="./assets/Suma-College-logo.png" alt="Summa logo">
+        </div>
+        <div class="dashboard-inner">
+            <div class="dashboard-sidebar">
+                <div class="dashboard-sidebar-title">DASHBOARD</div>
+                <div class="dashboard-sidebar-grid">
+                    <div class="sidebar-item" onclick="goto('home')">
+                        <i class="fas fa-home"></i>
+                        Home
+                    </div>
+                    <div class="sidebar-item" onclick="goto('oefeningen')">
+                        <i class="fas fa-dumbbell"></i>
+                        Oefeningen
+                    </div>
+                    <div class="sidebar-item" onclick="goto('instellingen')">
+                        <i class="fas fa-cog"></i>
+                        Instellingen
+                    </div>
+                </div>
+            </div>
+    
+            <div class="dashboard-home">
+                    <div class="oefeningen-count">
+                        AANTAL OEFENINGEN <br> <span class="oefening-count">1</span>
+                    </div>
+            </div>
+
+            <div class="dashboard-oefeningen">
+                <div class="dashboard-oefeningen-grid">
+                    <table>
+                        <tr>
+                            <th>Oefening naam</th>
+                            <th>Oefening omschrijving</th>
+                            <th>Afbeelding</th>
+                            <th>Wijzigen</th>
+                            <th>Verwijderen</th>
+                        </tr>
+                        <tr>
+                            <td>Squats</td>
+                            <td>doe 100kg squats</td>
+                            <td><img id="table-img" src="https://www.muscleandfitness.com/wp-content/uploads/2018/11/ronnie-coleman-squat-1109.jpg?quality=86&strip=all" alt=""></td>
+                            <td><div class="update-btn">Wijzigen</div></td>
+                            <td class="flex-center"><div class="delete-btn">Verwijderen</div></td>
+                        </tr>
+                        <tr>
+                            <td>Squats</td>
+                            <td>doe 100kg squats</td>
+                            <td><img id="table-img" src="https://www.muscleandfitness.com/wp-content/uploads/2018/11/ronnie-coleman-squat-1109.jpg?quality=86&strip=all" alt=""></td>
+                            <td><div class="update-btn">Wijzigen</div></td>
+                            <td class="flex-center"><div class="delete-btn">Verwijderen</div></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</body>
+<script src="./scripts/main.js"></script>
+<script src="./scripts/login.js"></script>
+<script src="./scripts/dashboard.js"></script>
+</html>
