@@ -1,5 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
+import React, { useEffect, useState } from "react";
 import "react-native-gesture-handler";
 
 import { NavigationContainer } from "@react-navigation/native";
@@ -11,6 +12,7 @@ const Stack = createStackNavigator();
 
 import Login from "./components/Login";
 import Register from "./components/Register";
+import Home from "./components/Home";
 
 const App = () => {
   return (
@@ -21,6 +23,7 @@ const App = () => {
       }}>
         <Stack.Screen component={Login} name="Loginscreen"></Stack.Screen>
         <Stack.Screen component={Register} name="Registerscreen"></Stack.Screen>
+        <Stack.Screen component={Home} name="Homescreen"></Stack.Screen>
       </Stack.Navigator>
     </NavigationContainer>
   );
