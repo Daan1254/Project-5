@@ -98,48 +98,206 @@
     justify-content: center;
 }
 
+
 .dashboard-oefeningen-grid {
     width: 90%;
-    height: 50vh;
-    margin-top: 15vh;
+    height: 75vh;
+    margin-top: 10vh;
+
+
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 5px;   
+    overflow: scroll;
 }
 
-table {
+.dashboard-oefeningen-grid::-webkit-scrollbar {
+    display: none;
+}
+
+.dashboard-oefeningen-grid::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 5px;
+
+}
+
+.exercise-item {
+    width: 350px;
+    height: 250px;
+    background-color: rgba(74, 71, 71, .4);
+    border-radius: 10px;
+
+    display: flex;
+    flex-direction: column;
+}
+
+.exercise-item > img {
     width: 100%;
-    height: max-content;
-    border: 1px solid gray;
-
-}
-
-tr {
-    text-align: center;
-    border: 2px solid gray;
-    width: 1fr;
-}
-
-#table-img {
-    width: 25vh;
-    height: 15vh;
+    height: 50%;
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
     aspect-ratio: 1/1;
 }
 
-.update-btn {
-    background-color: rgb(21, 150, 236);
-    border-radius: 2px;
-    padding: 7px;
+.exercise-title {
+    font-size: 1.2rem;
+    padding: 5px;
+}
+
+.exercise-description {
+    font-size: .8rem;
+    margin-top: 5px;
     margin-left: 5px;
+    overflow: scroll;
+    overflow-x: hidden;
+    height: 5vh;
+}
+
+
+.exercise-description::-webkit-scrollbar {
+    border: 1px solid gray;
+    border-radius: 5px;
+}
+
+.exercise-description::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 5px;
+
+}
+
+
+.exercise-btn-container {
+    width: 100%;
+    
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.exercise-btn {
+    padding: 10px 15px;
+    margin: 5px;
+    border-radius: 10px;
+    font-size: 15px;
 }
 
 .delete-btn {
     background-color: red;
-    border-radius: 2px;
-    padding: 7px;
-    width: 150px;
+}
+.edit-btn {
+    background-color: rgb(10, 128, 240);
 }
 
-.flex-center {
-    height: 100%;
+
+.exercise-detail-container {
+    padding: 10px;
+}
+
+
+
+.dashboard-edit-oefening {
+    width: 100%;
+    height: 80vh;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
     align-items: center;
+    justify-content: center;
+}
+
+.dashboard-edit-inner {
+    width: 40%;
+    height: 70%;
+    background-color: rgba(74, 71, 71, .4);
+    border-radius: 10px;
+
+    display: flex;
+    flex-direction: column;
+}
+
+.dashboard-edit-inner > img {
+    width: 100%;
+    height: 50%;
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+    aspect-ratio: 1/1;
+}
+
+.dashboard-edit-inner-title {
+    font-size: 1.2rem;
+    padding: 5px;
+    border: none;
+    background: transparent;
+}
+
+.dashboard-edit-title {
+    font-size: 1.5rem;
+    margin: 10px;
+    font-weight: bold;
+}
+
+
+.dashboard-edit-inner-title {
+    font-size: 1.2rem;
+    padding: 5px;
+}
+
+.dashboard-edit-inner-description {
+    font-size: .8rem;
+    margin-top: 5px;
+    margin-left: 5px;
+    overflow: scroll;
+    overflow-x: hidden;
+    height: 10vh;
+
+    background-color: transparent;
+    border: none;
+}
+
+
+.dashboard-edit-inner-description::-webkit-scrollbar {
+    border: 1px solid gray;
+    border-radius: 5px;
+}
+
+.dashboard-edit-inner-description::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 5px;
+
+}
+
+
+.dashboard-edit-inner-btn-container {
+    width: 100%;
+    
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.dashboard-edit-inner-btn {
+    padding: 10px 15px;
+    margin: 5px;
+    border-radius: 10px;
+    font-size: 15px;
+}
+
+.delete-btn {
+    background-color: red;
+}
+.edit-btn {
+    background-color: rgb(10, 128, 240);
+}
+
+
+.dashboard-edit-inner-detail-container {
+    padding: 10px;
+}
+
+.dashboard-edit-editbtn {
+    margin-top: 5vh;
+    padding: 10px 15px;
+    background-color: rgb(0, 153, 255);
+    border-radius: 10px;
 }

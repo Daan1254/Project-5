@@ -14,7 +14,7 @@ const notify = (type, message, timeout) => {
     $(".notify").animate({
         right: 2 + "%"
     }, 1000, () => {
-        document.querySelector(".notify-loadingbar").style.animation = `notify-loadinganim forwards ${timeout}ms`;
+        document.querySelector(".notify-loadingbar").style ? document.querySelector(".notify-loadingbar").style.animation = `notify-loadinganim forwards ${timeout}ms` : null
     });
 
     setTimeout(() => {
