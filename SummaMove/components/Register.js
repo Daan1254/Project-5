@@ -1,25 +1,53 @@
 import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, View, Button } from "react-native";
+import React, { useEffect, useState } from "react";
+import { StyleSheet, Text, View, Button, Alert } from "react-native";
 import { TextInput } from "react-native-gesture-handler";
 import { TouchableOpacity } from "react-native-web";
 
-const App = () => {
+const App = ({route, navigation}) => {
+    const [Email, setemail] = useState("");
+    const [username, setusername] = useState("");
+    const [password, setPassword] = useState("");
+    const [confirm, setConfirm] = useState("");
+    const checkRegister = async (navigation) =>{
+
+        if(username != "" && password != "" && confirm != ""&& Email != "" && password == confirm){
+            const response = await fetch("http://node7.consulhosting.nl:24187/register", {
+                method: 'POST',
+                headers: {
+                'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    'username': username, 
+                    'password': password,
+                    'email':Email
+                })
+            })
+            navigation.navigate("Loginscreen")
+        }
+        else{
+            Alert.alert("Hebt niet alles goed ingevuld.");
+        }
+    }
+
   return (
     <View style={styles.container}>
       <View>
         <Text style={styles.title}>Register</Text>
-        <TextInput style={styles.input} placeholder="Username"></TextInput>
-        <TextInput style={styles.input} placeholder="Password"></TextInput>
+        <TextInput style={styles.input}  onChangeText={(text) => setemail(text)} placeholder="Email"></TextInput>
+        <TextInput style={styles.input}  onChangeText={(text) => setusername(text)} placeholder="Username"></TextInput>
+        <TextInput style={styles.input} onChangeText={(text) => setPassword(text)} placeholder="Password"></TextInput>
+        <TextInput style={styles.input} onChangeText={(text) => setConfirm(text)} placeholder="Herhaal password"></TextInput>
         <Button
-          title="Login"
+          title="Account aanmaken"
           color="#7a42f4"
-          onPress={() => Alert.alert("Button with adjusted color pressed")}
+          onPress={() => {checkRegister(navigation)}}
         />
-        <Text style={styles.gray}>Heb je nog geen account?</Text>
+        <Text style={styles.gray}>Heb je al een account?</Text>
         <Button
-          title="Register"
+          title="Login Met bestaand account"
           color="#7a42f4"
-          onPress={() => Alert.alert("Button with adjusted color pressed")}
+          onPress={() => {navigation.navigate("Loginscreen")}}
         />
       </View>
     </View>
