@@ -96,13 +96,14 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-direction: column;
 }
 
 
 .dashboard-oefeningen-grid {
     width: 90%;
     height: 75vh;
-    margin-top: 10vh;
+    margin-top: 5vh;
 
 
     display: grid;
@@ -283,11 +284,101 @@
     font-size: 15px;
 }
 
+.dashboard-create-oefening {
+    width: 100%;
+    height: 80vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 30px;
+}
+
+.dashboard-create-inner {
+    width: 40%;
+    height: 70%;
+    background-color: rgba(74, 71, 71, .4);
+    border-radius: 10px;
+
+    display: flex;
+    flex-direction: column;
+}
+
+.dashboard-create-inner > img {
+    width: 100%;
+    height: 50%;
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+    aspect-ratio: 1/1;
+}
+
+.dashboard-create-title {
+    font-size: 1.5rem;
+    margin: 10px;
+    font-weight: bold;
+}
+
+.dashboard-create-inner-title {
+    height: 4vw;
+    margin: 3px;
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-top: 3vw;
+    
+    background-color: white;
+    border: black solid 2px;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.dashboard-create-inner-description {
+    height: 10vw;
+    margin: 3px;
+    margin-left: 20px;
+    margin-right: 20px;
+    background-color: white;
+    border: black solid 2px;
+    border-radius: 10px;
+    text-align: center;
+    overflow: scroll;
+    overflow-x: hidden;
+    resize: none;
+}
+
+.dashboard-create-inner-url {
+    height: 4vw;
+    margin: 3px;
+    margin-left: 20px;
+    margin-right: 20px;
+    background-color: white;
+    border: black solid 2px;
+    border-radius: 10px;
+    text-align: center;
+
+}
+
+.dashboard-create-createbtn
+{
+    margin-top: 20px;
+    background-color: rgb(70, 255, 70);
+    border-radius: 10px;
+    padding: 20px;
+    width: 20vw;
+    text-align: center;
+}
+
 .delete-btn {
     background-color: red;
 }
 .edit-btn {
     background-color: rgb(10, 128, 240);
+}
+.create-btn {
+    background-color: rgb(35, 207, 0);
+    border-radius: 20px;
+    border: none;
+    width: 20vw;
+    height: 50px;
 }
 
 

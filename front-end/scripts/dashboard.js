@@ -85,7 +85,6 @@ const editSource = () => {
 }
 
 
-
 $(".dashboard-edit-srcChanger").on("input", function(){
     let src = $(".dashboard-edit-srcChanger").val()
     $("#dashboard-edit-imgSource").attr("src", src)
@@ -133,6 +132,54 @@ const confirmChanges = async () => {
     
 }
 
+const create = () => {
+    last_page = "dashboard-create-oefening"
+    $(".dashboard-oefeningen").fadeOut(250, () => {
+        $(".dashboard-create-oefening").fadeIn(250, () => {
+
+        })
+    })
+}
+const sendcreatereq = async () => {
+    let title = $(".dashboard-create-inner-title").val()
+    let description = $(".dashboard-create-inner-description").val()
+    let imgSource = $(".dashboard-create-inner-url").val()
+
+    try {
+        console.log(acces_token)
+        let response = await fetch("http://node7.consulhosting.nl:24187/oefeningen/create", {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+                'Authorization': acces_token
+            },
+            body: JSON.stringify({
+                name: title,
+                description: description,
+                picture: imgSource
+            })
+        })
+    
+    
+        if (response.status == 200) {
+            let json = await response.json()
+            acces_token = json.acces_token
+            notify("succes", "oefening succesvol aangemaakt")
+
+            $(".dashboard-create-oefening").fadeOut(250, () => {
+                $(".dashboard-oefeningen").fadeIn(250)
+                loadExercises()
+            })
+        } else {
+            notify("error", "Unauthorized", 2500)
+        }
+    }
+    catch(e) {
+        console.error(e)
+    }
+    
+}
 
 const goto = (goto) => {
     console.log(goto)

@@ -79,8 +79,9 @@
                     </div> -->
 
                   
-
+                    
                 </div>
+                <button class="create-btn" onclick="create()">Nieuwe oefening</button>
             </div>
 
             <div style="display: none;" class="dashboard-edit-oefening">
@@ -90,6 +91,7 @@
                     <input type="text" value="Deadlift" class="dashboard-edit-inner-title"></input>
                     <textarea type="text"  class="dashboard-edit-inner-description">De deadlift is hands-down de beste oefening voor meer spiermassa. Het spreekt de meeste spiergroepen aan van alle oefeningen. Je traint er je armen, benen, billen, kuiten, buik, heupen én rug mee. De deadlift mag niet ontbreken in je work-out!</textarea>
                     <div class="dashboard-edit-inner-btn-container">
+                        <img id="dashboard-edit-imgSource" alt="">
                         <div class="dashboard-edit-inner-btn edit-btn">Wijzigen</div>
                         <div class="dashboard-edit-inner-btn delete-btn">Verwijderen</div>
                     </div>
@@ -97,6 +99,16 @@
                 <div onclick="confirmChanges()">IMG SOURCE</div>
                 <input class="dashboard-edit-srcChanger" value="https://media.istockphoto.com/photos/handsome-man-working-out-at-the-gym-picture-id1205094548?k=20&m=1205094548&s=612x612&w=0&h=7NoNAagLKKRkKGzWHxY9qqVwVgnD9zXyK6AZAlwoBIg=" type="text"></input>
                 <div class="dashboard-edit-editbtn" onclick="confirmChanges()">BEVESTIGEN</div>
+            </div>
+            <div style="display: none;" class="dashboard-create-oefening">
+                <div class="dashboard-create-title">Oefening toevoegen</div>
+                <div class="dashboard-create-inner">
+                    <input type="text" placeholder="Naam" class="dashboard-create-inner-title"></input>
+                    <textarea type="text" placeholder="Beschrijving van de oefening" class="dashboard-create-inner-description"></textarea>
+                    <input class="dashboard-create-inner-url" placeholder="URL van een afbeelding" type="text"></input>
+                </div>
+    
+                <div class="dashboard-create-createbtn" onclick="sendcreatereq()">OEFENING AANMAKEN</div>
             </div>
         </div>
        
