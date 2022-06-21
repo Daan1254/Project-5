@@ -21,7 +21,7 @@ const notify = (type, message, timeout) => {
         $(".notify").animate({
             right: -15 + "%",
         }, 1000, () => {
-            document.querySelector(".notify-loadingbar").style.animation = ``;
+            document.querySelector(".notify-loadingbar").style ? document.querySelector(".notify-loadingbar").style.animation = `` : null
             $(".notify").remove()
         }); 
     }, parseInt(timeout))
