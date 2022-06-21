@@ -8,19 +8,24 @@ import {
   Alert,
   ActivityIndicator,
   FlatList,
+  Pressable
 } from "react-native";
 import { TextInput } from "react-native-gesture-handler";
 import { TouchableOpacity } from "react-native-web";
-import { getCurrentToken, setToken } from "./Authorizartion";
+import { getCurrentToken, setToken, getUser } from "./Authorizartion";
 
 import Oefening from "./oefening";
 const App = ({ route, navigation }) => {
+  getUser((id)=>{
+    console.log(id + " dit is het id");
+  })
+  console.log(route.params);
   let AccessToken;
   getCurrentToken((token) => {
     // console.log("got:" + token)
     AccessToken = token;
   });
-
+  
   const [isLoading, setLoading] = React.useState(true);
   const [oefeningen, setOefeningen] = React.useState([]);
   const url = "http://node7.consulhosting.nl:24187/spiergroepen"
@@ -43,7 +48,7 @@ const App = ({ route, navigation }) => {
         AccessToken = getCurrentToken()
         console.log(AccessToken + " nieuwe token");
         setOefeningen(json.oefeningen);
-        console.log(json.oefeningen);
+        // console.log(json.oefeningen);
       } else {
         console.log("geen authorization")
       }
@@ -59,7 +64,8 @@ const App = ({ route, navigation }) => {
 
   return (
     <View style={styles.container}>
-      <Text style={{fontSize: 15,}}>Wat gaan we vandaag trainen?</Text>
+      <Text style={{fontSize: 25, textAlign: "center",}}>Wat gaan we vandaag trainen,</Text>
+      <Text style={{fontSize: 25, textAlign: "center",}}>{route.params.username}?</Text>
       {isLoading ? (
         <ActivityIndicator />
       ) : (
@@ -67,7 +73,13 @@ const App = ({ route, navigation }) => {
           data={oefeningen}
           keyExtractor={({ oefeningen }, key) => key}
           renderItem={({ item }) => (
+            <Pressable
+              onPress={() => {
+                navigation.navigate("Workout");
+              }}
+            >
               <Oefening title={item.name} BackgroundImg={item.img} description={item.description}/>
+              </Pressable>
           )}
         />
       )}
@@ -78,6 +90,7 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: "white",
     paddingTop: 50,
+    height: '100%',
     width: "100%"
   },
   title: {

@@ -13,6 +13,7 @@ const Stack = createStackNavigator();
 import Login from "./components/Login";
 import Register from "./components/Register";
 import Home from "./components/Home";
+import Workout from "./components/Workout";
 
 const App = () => {
   return (
@@ -24,6 +25,7 @@ const App = () => {
         <Stack.Screen component={Login} name="Loginscreen"></Stack.Screen>
         <Stack.Screen component={Register} name="Registerscreen"></Stack.Screen>
         <Stack.Screen component={Home} name="Homescreen"></Stack.Screen>
+        <Stack.Screen component={Workout} name="Workout"></Stack.Screen>
       </Stack.Navigator>
     </NavigationContainer>
   );

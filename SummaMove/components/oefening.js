@@ -6,11 +6,11 @@ export default function Oefening({BackgroundImg, title, description, price}) {
     
     return  (
         <View style={styles.feedItemContainer}>
-            <ImageBackground style={{height: '100%', width: 150, borderRadius: 10}} source={{uri: BackgroundImg}}>
+            <ImageBackground style={{height: '100%', width: 150, borderRadius: 20}} source={{uri: BackgroundImg}}>
             </ImageBackground>
-            <View style={{width: 300,}}>
+            <View style={{width: "100%", textAlign: 'center', justifyContent: "center", flex: 1}}>
                 <Text style={styles.feedTitle}>{title}</Text>
-                <Text style={{textAlign: 'center',}}>{description}</Text>
+                <Text style={{textAlign: 'center', color: 'white'   }}>{description}</Text>
             </View>
         </View>
     )
@@ -18,19 +18,18 @@ export default function Oefening({BackgroundImg, title, description, price}) {
 
 const styles = StyleSheet.create({
     feedItemContainer: {
-        width: '100%',
-        backgroundColor:"black",
+        backgroundColor:"#999897",
         margin: 15,
         height: 200,
-        width: 150,
+        width: "90%",
         flex: 1,
         flexDirection:'row',
+        borderRadius: 20,
     },
     feedTitle: {
         textAlign: 'center',
-        padding: 15,
         fontSize: 20,
-        color: 'black',
+        color: 'white',
         fontWeight: 'bold'
     }
   });   
