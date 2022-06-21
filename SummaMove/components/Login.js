@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { StyleSheet, Text, View, Button, Alert } from "react-native";
 import { TextInput } from "react-native-gesture-handler";
 import { TouchableOpacity } from "react-native-web";
+import { getCurrentToken, setToken } from "./Authorizartion";
 
 const App = ({ route, navigation }) => {
   const [username, setusername] = useState("");
@@ -23,11 +24,16 @@ const App = ({ route, navigation }) => {
     if (response.status === 200) {
       const json = await response.json()
       console.log(json)
+      console.log(json.acces_token)
+      setToken(json.acces_token);
       navigation.navigate("Homescreen", { token: json.acces_token, userid: json.userid });
     } else {
       Alert.alert("Je hebt iets niet goed ingevoerd");
     }
   };
+  getCurrentToken((token) => {
+    console.log(token)
+  })
   return (
     <View style={styles.container}>
       <View>

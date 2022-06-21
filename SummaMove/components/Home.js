@@ -1,35 +1,84 @@
 import { StatusBar } from "expo-status-bar";
 import React, { useEffect, useState } from "react";
-import { StyleSheet, Text, View, Button, Alert } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  View,
+  Button,
+  Alert,
+  ActivityIndicator,
+  FlatList,
+} from "react-native";
 import { TextInput } from "react-native-gesture-handler";
 import { TouchableOpacity } from "react-native-web";
+import { getCurrentToken, setToken } from "./Authorizartion";
 
-const App = ({route, navigation}) => {
-    console.log('test');
-    console.log(route.params);
+import Oefening from "./oefening";
+const App = ({ route, navigation }) => {
+  let AccessToken;
+  getCurrentToken((token) => {
+    // console.log("got:" + token)
+    AccessToken = token;
+  });
+
+  const [isLoading, setLoading] = React.useState(true);
+  const [oefeningen, setOefeningen] = React.useState([]);
+  const url = "http://node7.consulhosting.nl:24187/spiergroepen"
+  const getJobs = async () => {
+    try {
+      const response = await fetch(
+        url,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+            Authorization: AccessToken,
+          },
+        }
+      );
+
+      if (response.status == 200) {
+        const json = await response.json();
+        setToken(json.acces_token);
+        AccessToken = getCurrentToken()
+        console.log(AccessToken + " nieuwe token");
+        setOefeningen(json.oefeningen);
+        console.log(json.oefeningen);
+      } else {
+        console.log("geen authorization")
+      }
+    } catch (e) {
+      // console.error(e);
+    } finally {
+      setLoading(false);
+    }
+  };
+  React.useEffect(() => {
+    getJobs();
+  }, [url]);
+
   return (
     <View style={styles.container}>
-        <View style={styles.grid}>
-          <Text>Home screen</Text>
-        </View>
+      <Text style={{fontSize: 15,}}>Wat gaan we vandaag trainen?</Text>
+      {isLoading ? (
+        <ActivityIndicator />
+      ) : (
+        <FlatList
+          data={oefeningen}
+          keyExtractor={({ oefeningen }, key) => key}
+          renderItem={({ item }) => (
+              <Oefening title={item.name} BackgroundImg={item.img} description={item.description}/>
+          )}
+        />
+      )}
     </View>
   );
 };
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     backgroundColor: "white",
-    alignItems: "center",
-    justifyContent: "center",
-    padding: 50,
-  },
-  grid:{
-
-    flex: 1,
-    width: "100%",
-    borderRadius: 40,
-    alignItems: "center",
-    justifyContent: "center",
+    paddingTop: 50,
+    width: "100%"
   },
   title: {
     fontSize: 60,
@@ -50,7 +99,11 @@ const styles = StyleSheet.create({
     color: "gray",
     marginBottom: 5,
     marginTop: 25,
-    textAlign:"center",
+    textAlign: "center",
   },
+  displayContainer:{
+    overflow: "scroll",
+    margin: 'auto',
+  }
 });
 export default App;
