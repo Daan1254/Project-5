@@ -209,8 +209,34 @@ const sendcreatereq = async () => {
 }
 
 let users;
+let roles;
+const loadRoles = async () => {
+    try {
+        const response = await fetch("http://node7.consulhosting.nl:24187/roles", {
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+                'Authorization': acces_token
+            }
+        })
+    
+        if (response.status == 200) {
+            const json = await response.json(); 
+            acces_token = json.acces_token
+            roles = json.roles
+            
+        } else {
+            notify("error", "Unauthorized", 2500)
+        }
+    } catch(e) {
+        console.error(e)
+    }
+    
+}
+
 const loadUsers = async () => {
     try {
+        await loadRoles();
         const response = await fetch("http://node7.consulhosting.nl:24187/users", {
             headers: {
                 'Content-Type': 'application/json',
@@ -223,10 +249,11 @@ const loadUsers = async () => {
             const json = await response.json(); 
             acces_token = json.acces_token
             users = json.users
+            
             let x = ''
-            x += `<tr><th>Username</td><th>Email</th><th></th><th></th></tr>`
+            x += `<tr><th>Username</td><th>Email</th><th>Rol</th><th></th><th></th></tr>`
             users.forEach((item) => {
-                x += `<tr><td>${item.username}</td><td>${item.email}</td><td style="color: red;" onclick="deleteuser(${item.id})">X</td><td><i class="fas fa-edit"></i></td></tr>`
+                x += `<tr><td>${item.username}</td><td>${item.email}</td><td>${roles[item.roleid - 1].role}</td><td style="color: red;" onclick="deleteuser(${item.id})">X</td><td><i class="fas fa-edit"></i></td></tr>`
             })
             $(".tabel").html("")
             $(".tabel").append(x)
