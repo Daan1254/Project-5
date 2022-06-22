@@ -118,6 +118,63 @@
                 <table class="tabel">
                     
                 </table>
+
+                <div class="add-user-btn" onclick="goto('new_user')">NIEUWE GEBRUIKER AANMAKEN</div>
+
+            </div>
+
+            <div style="display: none;" class="dashboard-add-gebruikers">
+                <div class="dashboard-add-container">
+                    <div class="dashboard-add-title">NIEUWE GEBRUIKER</div>
+                    <div class='add-input-container'>
+                        <label class='input-label'>Username <span class='input-required'>*</span> </label>
+                        <input id="add-user" type="text" placeholder="Username..." class="Input"/>
+                    </div>
+                    <div class='add-input-container'>
+                        <label class='input-label'>Email <span class='input-required'>*</span> </label>
+                        <input id="add-email" type="email" placeholder="Email..." class="Input"/>
+                    </div>
+                    <div class='add-input-container'>
+                        <label class='input-label'>Wachtwoord <span class='input-required'>*</span> </label>
+                        <input id="add-pass" type="text" placeholder="Wachtwoord..." class="Input"/>
+                    </div>
+                    <div class='add-input-container'>
+                        <label class='input-label'>Rol <span class='input-required'>*</span> </label>
+                        <select name="user_role" id="user_role">
+                            <option value="1">Admin</option>
+                            <option value="2">Gebruiker</option>
+                        </select>
+                    </div>
+
+                    <div class="add-btn-user"onclick="addUser()">USER TOEVOEGEN</div>
+                </div>
+            </div>
+
+            <div style="display: none;" class="dashboard-edit-gebruikers">
+                <div class="dashboard-add-container">
+                    <div class="dashboard-add-title">NIEUWE GEBRUIKER</div>
+                    <div class='add-input-container'>
+                        <label class='input-label'>Username <span class='input-required'>*</span> </label>
+                        <input id="edit-user" type="text" placeholder="Username..." class="Input"/>
+                    </div>
+                    <div class='add-input-container'>
+                        <label class='input-label'>Email <span class='input-required'>*</span> </label>
+                        <input id="edit-email" type="email" placeholder="Email..." class="Input"/>
+                    </div>
+                    <div class='add-input-container'>
+                        <label class='input-label'>Wachtwoord <span class='input-required'>*</span> </label>
+                        <input id="edit-pass" type="text" placeholder="Wachtwoord..." class="Input"/>
+                    </div>
+                    <div class='add-input-container'>
+                        <label class='input-label'>Rol <span class='input-required'>*</span> </label>
+                        <select name="user_role" id="edit_user_role">
+                            <option value="1">Admin</option>
+                            <option value="2">Gebruiker</option>
+                        </select>
+                    </div>
+
+                    <div class="add-btn-user"onclick="editUser()">USER TOEVOEGEN</div>
+                </div>
             </div>
         </div>
        

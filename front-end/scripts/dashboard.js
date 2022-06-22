@@ -234,6 +234,8 @@ const loadRoles = async () => {
     
 }
 
+let allUsers;
+
 const loadUsers = async () => {
     try {
         await loadRoles();
@@ -252,8 +254,9 @@ const loadUsers = async () => {
             
             let x = ''
             x += `<tr><th>Username</td><th>Email</th><th>Rol</th><th></th><th></th></tr>`
-            users.forEach((item) => {
-                x += `<tr><td>${item.username}</td><td>${item.email}</td><td>${roles[item.roleid - 1].role}</td><td style="color: red;" onclick="deleteuser(${item.id})">X</td><td><i class="fas fa-edit"></i></td></tr>`
+            allUsers = users
+            users.forEach((item, key) => {
+                x += `<tr><td>${item.username}</td><td>${item.email}</td><td>${roles[item.roleid - 1].role}</td><td style="color: red;" onclick="deleteuser(${item.id})">X</td><td><i onclick="goto('edit_user', ${key})" class="fas fa-edit"></i></td></tr>`
             })
             $(".tabel").html("")
             $(".tabel").append(x)
@@ -266,7 +269,100 @@ const loadUsers = async () => {
     
 }
 
-const goto = (goto) => {
+
+const addUser = async () => {
+    const username = $("#add-user").val()
+    const password = $("#add-pass").val()
+    const userRole = $("#user_role").val()
+    const email    = $("#add-email").val()
+
+    try {
+        const response = await fetch("http://node7.consulhosting.nl:24187/addUser", {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+                'Authorization': acces_token
+            },
+
+            body: JSON.stringify({
+                username: username,
+                password: password,
+                userRole: userRole,
+                email: email
+            })
+        })
+
+
+        if (response.status == 200) {
+            let json = await  response.json()
+            acces_token = json.acces_token
+            loadUsers()
+            goto('gebruikers')
+        } else {
+            notify("error", "Unauthorized", 2500)
+        }
+    } catch(e) {
+        console.log(e)
+    }
+}
+let cur_user;
+
+
+const loadUserData = (id) => {
+    let user = allUsers[id]
+    cur_user = user.id
+    $("#edit-user").val(user.username)
+    $("#edit-pass").val(user.password)
+    $("#edit_user_role").val(user.roleid).change();
+    $("#edit-email").val(user.email)
+}
+
+
+
+
+const editUser = async () => {
+
+    const username = $("#edit-user").val()
+    const password = $("#edit-pass").val()
+    const userRole = $("#edit_user_role").val()
+    const email    = $("#edit-email").val()
+
+
+    try {
+        const response = await fetch("http://node7.consulhosting.nl:24187/editUser", {
+            method: "PUT",
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+                'Authorization': acces_token
+            },
+
+            body: JSON.stringify({
+                username: username,
+                password: password,
+                email: email,
+                userRole: userRole,
+                id: cur_user
+            })
+        })
+
+
+        if (response.status == 200) {
+            let json = await response.json()
+            acces_token = json.acces_token
+            loadUsers()
+            goto('gebruikers')
+        } else {
+            notify("error", "Unauthorized", 2500)
+
+        }
+    } catch(e) {
+        console.error(e)
+    }
+}
+
+const goto = (goto, id) => {
     console.log(goto)
     if (goto == 'home') {
         console.log(last_page)
@@ -288,6 +384,25 @@ const goto = (goto) => {
             $(".dashboard-gebruikers").fadeIn(250)
             last_page = "dashboard-gebruikers"
             loadUsers()
+        })
+    } else if (goto == 'new_user') {
+        $(`.${last_page}`).fadeOut(250, () => {
+            $(".dashboard-add-gebruikers").fadeIn(250)
+            last_page = 'dashboard-add-gebruikers'
+            $("#add-user").val("")
+            $("#add-pass").val("")
+            $("#user_role").val("")
+            $("#add-email").val("")
+        })
+    } else if (goto == 'edit_user') {
+        $(`.${last_page}`).fadeOut(250, () => {
+            $(".dashboard-edit-gebruikers").fadeIn(250)
+            last_page = 'dashboard-edit-gebruikers'
+            $("#add-user").val("")
+            $("#add-pass").val("")
+            $("#user_role").val("")
+            $("#add-email").val("")
+            loadUserData(id)
         })
     }
 }
