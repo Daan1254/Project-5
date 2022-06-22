@@ -16,10 +16,69 @@ import { getCurrentToken, setToken } from "./Authorizartion";
 
 import Oefening from "./oefening";
 const App = ({ route, navigation }) => {
+  let AccessToken;
+  getCurrentToken((token) => {
+    // console.log("got:" + token)
+    AccessToken = token;
+  });
+  const [isLoading, setLoading] = React.useState(true);
+  const [oefeningen, setOefeningen] = React.useState([]);
+  const url = "http://node7.consulhosting.nl:24187/spiergroep/oefening/" + route.params.data
+  const getJobs = async () => {
+    try {
+      const response = await fetch(
+        url,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+            Authorization: AccessToken,
+          },
+        }
+      );
 
+      if (response.status == 200) {
+        const json = await response.json();
+        setToken(json.acces_token);
+        AccessToken = getCurrentToken()
+        console.log(AccessToken + " nieuwe token");
+        console.log(response)
+        console.log(json)
+        setOefeningen(json.oefening)
+
+
+
+
+
+      } else {
+        console.log("geen authorization")
+      }
+    } catch (e) {
+      // console.error(e);
+    } finally {
+      setLoading(false);
+    }
+  };
+  React.useEffect(() => {
+    getJobs();
+  }, [url]);
   return (
     <View style={styles.container}>
-        <Text>hoi</Text>
+      <Text style={{fontSize: 25, textAlign: "center",}}>welke oefening wil je uitvoeren,</Text>
+      <Text style={{fontSize: 25, textAlign: "center",}}>{route.params.username}?</Text>
+      {isLoading ? (
+        <ActivityIndicator />
+      ) : (
+        <FlatList
+          data={oefeningen}
+          keyExtractor={({ oefeningen }, key) => key}
+          renderItem={({ item }) => (
+            
+              <Oefening title={item.name} BackgroundImg={item.picture} description={item.description}/>
+
+          )}
+        />
+      )}
     </View>
   );
 };

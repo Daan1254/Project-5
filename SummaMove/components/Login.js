@@ -23,9 +23,9 @@ const App = ({ route, navigation }) => {
     // let acces_token = null;
     if (response.status === 200) {
       const json = await response.json()
-      console.log(json)
-      console.log('hier');
-      console.log(json.acces_token)
+      // console.log(json)
+      // console.log('hier');
+      // console.log(json.acces_token)
       setToken(json.acces_token);
       setUser(json.userid)
       navigation.navigate("Homescreen", {  username:json.username });

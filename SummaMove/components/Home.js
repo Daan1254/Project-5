@@ -16,10 +16,8 @@ import { getCurrentToken, setToken, getUser } from "./Authorizartion";
 
 import Oefening from "./oefening";
 const App = ({ route, navigation }) => {
-  getUser((id)=>{
-    console.log(id + " dit is het id");
-  })
-  console.log(route.params);
+
+  // console.log(route.params);
   let AccessToken;
   getCurrentToken((token) => {
     // console.log("got:" + token)
@@ -46,8 +44,8 @@ const App = ({ route, navigation }) => {
         const json = await response.json();
         setToken(json.acces_token);
         AccessToken = getCurrentToken()
-        console.log(AccessToken + " nieuwe token");
         setOefeningen(json.oefeningen);
+        console.log(json.oefeningen[1].id);
         // console.log(json.oefeningen);
       } else {
         console.log("geen authorization")
@@ -75,7 +73,7 @@ const App = ({ route, navigation }) => {
           renderItem={({ item }) => (
             <Pressable
               onPress={() => {
-                navigation.navigate("Workout");
+                navigation.navigate("Workout", { data: item.id, username: route.params.username});
               }}
             >
               <Oefening title={item.name} BackgroundImg={item.img} description={item.description}/>
