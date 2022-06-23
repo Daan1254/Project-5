@@ -16,6 +16,7 @@ export function getCurrentToken(callback) {
 export function setToken(token) {
     // console.log("Token has been set: " + token)
     acces_token = token
+    console.log(token);
 }
 
 export function getUser(callback){
