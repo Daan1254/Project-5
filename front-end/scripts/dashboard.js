@@ -17,7 +17,7 @@ const loadExercises = async () => {
     
             let x = ``
             oefeningen.forEach((item , key) => {
-                x += `<div class="exercise-item"><img src="${item.picture}" alt=""><div class="exercise-detail-container"><div class="exercise-title">${item.name}</div><div class="exercise-description">${item.description}</div><div class="exercise-btn-container"><div class="exercise-btn edit-btn" onclick="edit(${item.id}, ${key})">Wijzigen</div><div class="exercise-btn delete-btn" onclick="del(${item.id})">Verwijderen</div></div></div></div>`
+                x += `<div class="exercise-item"><img src="${item.picture}" alt=""><div class="exercise-detail-container"><div class="exercise-title">${item.name}</div><div class="exercise-description">${item.description}</div><div class="exercise-btn-container"><div class="exercise-btn edit-btn" onclick="edit(${item.id}, ${key})">Wijzigen</div><div class="exercise-btn delete-btn" onclick="del(${item.id})">Verwijderen</div></div><div class="qr-icon"><i onclick="createQR(${key})" class="fas fa-qrcode"></i></div></div></div>`
             })
             $(".dashboard-oefeningen-grid").html("")
             $(".dashboard-oefeningen-grid").append(x)
@@ -30,6 +30,15 @@ const loadExercises = async () => {
     
 }
 
+
+const createQR = async (key) => {
+    if (!oefeningen[key]) return;
+    console.log(oefeningen[key])
+    window.open(
+        `https://chart.googleapis.com/chart?chs=200x200&cht=qr&chl='title: ${oefeningen[key].name} description: ${oefeningen[key].description}'&choe=UTF-8`,
+        '_blank' // <- This is what makes it open in a new window.
+      );
+}
 
 const del = async (id) => {
     try {
