@@ -256,6 +256,7 @@ const loadUsers = async () => {
             x += `<tr><th>Username</td><th>Email</th><th>Rol</th><th></th><th></th></tr>`
             allUsers = users
             users.forEach((item, key) => {
+                
                 x += `<tr><td>${item.username}</td><td>${item.email}</td><td>${roles[item.roleid - 1].role}</td><td style="color: red;" onclick="deleteuser(${item.id})">X</td><td><i onclick="goto('edit_user', ${key})" class="fas fa-edit"></i></td></tr>`
             })
             $(".tabel").html("")
@@ -306,8 +307,159 @@ const addUser = async () => {
         console.log(e)
     }
 }
-let cur_user;
 
+let prestaties;
+
+const loadPrestaties = async () => {
+    try {
+        await loadUsers();
+        await loadExercises();
+
+        const response = await fetch("http://node7.consulhosting.nl:24187/prestaties", {
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+                'Authorization': acces_token
+            }
+        })
+    
+        if (response.status == 200) {
+            const json = await response.json(); 
+            acces_token = json.acces_token
+            prestaties = json.prestaties
+            
+            let x = ''
+            x += `<tr><th>Gebruiker</td><th>OefeningID</th><th>Datum</th><th>Starttijd</th><th>Eindtijd</th><th>Reps</th><th></th><th></th></tr>`
+
+            prestaties.forEach((item, key) => {
+                x += `<tr><td>${item.userid}</td><td>${item.oefeningid}</td><td>${item.datum}</td><td>${item.starttijd}</td><td>${item.eindtijd}</td><td>${item.reps}</td><td style="color: red;" onclick="deleteprestatie(${item.id})">X</td><td><i onclick="goto('edit_prestatie', ${key})" class="fas fa-edit"></i></td></tr>`
+            })
+            
+            $(".tabel-prestaties").html("")
+            $(".tabel-prestaties").append(x)
+        } else {
+            notify("error", "Unauthorized", 2500)
+        }
+    } catch(e) {
+        console.error(e)
+    }
+    
+}
+
+const addPrestatie = async () => {
+    const userid = $("#add-prestatie-user").val()
+    const oefeningid = $("#add-oefening").val()
+    const datum = $("#add-datum").val()
+    const starttijd    = $("#add-starttijd").val()
+    const eindtijd    = $("#add-eindtijd").val()
+    const reps    = $("#add-reps").val()
+
+    console.log(userid)
+    try {
+        const response = await fetch("http://node7.consulhosting.nl:24187/addPrestatie", {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+                'Authorization': acces_token
+            },
+
+            body: JSON.stringify({
+                userid: userid,
+                oefeningid: oefeningid,
+                datum: datum,
+                starttijd: starttijd,
+                eindtijd: eindtijd,
+                reps: reps
+            })
+        })
+
+
+        if (response.status == 200) {
+            let json = await  response.json()
+            acces_token = json.acces_token
+            loadPrestaties()
+            goto('prestaties')
+        } else {
+            notify("error", "Unauthorized", 2500)
+        }
+    } catch(e) {
+        console.log(e)
+    }
+}
+const editPrestatie = async () => {
+    const userid = $("#edit-prestatie-user").val()
+    const oefeningid = $("#edit-oefening").val()
+    const datum = $("#edit-datum").val()
+    const starttijd    = $("#edit-starttijd").val()
+    const eindtijd    = $("#edit-eindtijd").val()
+    const reps    = $("#edit-reps").val()
+
+
+    try {
+        const response = await fetch("http://node7.consulhosting.nl:24187/editPrestatie", {
+            method: "PUT",
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+                'Authorization': acces_token
+            },
+
+            body: JSON.stringify({
+                userid: userid,
+                oefeningid: oefeningid,
+                datum: datum,
+                starttijd: starttijd,
+                eindtijd: eindtijd,
+                reps: reps,
+                id: cur_prestatie
+            })
+        })
+
+
+        if (response.status == 200) {
+            let json = await response.json()
+            acces_token = json.acces_token
+            loadPrestaties()
+            goto('prestaties')
+        } else {
+            notify("error", "Unauthorized", 2500)
+
+        }
+    } catch(e) {
+        console.error(e)
+    }
+}
+
+
+const deleteprestatie = async (id) => {
+    try {
+            const response = await fetch("http://node7.consulhosting.nl:24187/prestaties/delete/" + id, {
+            method: "DELETE",
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+                'Authorization': acces_token
+            }
+        })
+
+        if (response.status == 200) {
+            notify("succes", "Prestatie met id " + id + " succesvol verwijderd", 2500)
+            let json = await response.json()
+            acces_token = json.acces_token
+            loadPrestaties()
+
+        }
+        else {
+            notify("error", "Unauthorized", 2500)
+        }
+    } catch(e) {
+        console.error(e)
+    }
+    
+}
+let cur_user;
+let cur_prestatie;
 
 const loadUserData = (id) => {
     let user = allUsers[id]
@@ -317,8 +469,20 @@ const loadUserData = (id) => {
     $("#edit_user_role").val(user.roleid).change();
     $("#edit-email").val(user.email)
 }
+const loadPrestatieData = (id) => {
+    let prestatie = prestaties[id]
+    cur_prestatie = prestatie.id
+
+    let datum = new Date(prestatie.datum).toLocaleDateString('zh-Hans-CN');
 
 
+    $("#edit-prestatie-user").val(prestatie.userid).change();
+    $("#edit_oefening").val(prestatie.roleid).change();
+    $("#edit-datum").val(datum);
+    $("#edit-starttijd").val(prestatie.starttijd);
+    $("#edit-eindtijd").val(prestatie.eindtijd);
+    $("#edit-reps").val(prestatie.reps);
+}
 
 
 const editUser = async () => {
@@ -403,6 +567,50 @@ const goto = (goto, id) => {
             $("#user_role").val("")
             $("#add-email").val("")
             loadUserData(id)
+        })
+    }
+    else if (goto == 'prestaties') {
+        $(`.${last_page}`).fadeOut(250, () => {
+            $(".dashboard-prestaties").fadeIn(250)
+            last_page = 'dashboard-prestaties'
+            loadPrestaties()
+        })
+    }
+    else if (goto == 'new_prestatie') {
+        $(`.${last_page}`).fadeOut(250, () => {
+            $(".dashboard-add-prestaties").fadeIn(250)
+            last_page = 'dashboard-add-prestaties'
+            let selectInhoud_user = '';
+            let selectInhoud_oefening = '';
+            users.forEach((item) => {
+                selectInhoud_user += `<option value="${item.id}">${item.username}</option>`
+            })
+            oefeningen.forEach((item) => {
+                selectInhoud_oefening += `<option value="${item.id}">${item.name}</option>`
+            })
+            $("#add-prestatie-user").html("")
+            $("#add-prestatie-user").append(selectInhoud_user)
+            $("#add-oefening").html("")
+            $("#add-oefening").append(selectInhoud_oefening)
+        })
+    } 
+    else if (goto == 'edit_prestatie') {
+        $(`.${last_page}`).fadeOut(250, () => {
+            $(".dashboard-edit-prestaties").fadeIn(250)
+            last_page = 'dashboard-edit-prestaties'
+            let selectInhoud_user = '';
+            let selectInhoud_oefening = '';
+            users.forEach((item) => {
+                selectInhoud_user += `<option value="${item.id}">${item.username}</option>`
+            })
+            oefeningen.forEach((item) => {
+                selectInhoud_oefening += `<option value="${item.id}">${item.name}</option>`
+            })
+            $("#edit-prestatie-user").html("")
+            $("#edit-prestatie-user").append(selectInhoud_user)
+            $("#edit-oefening").html("")
+            $("#edit-oefening").append(selectInhoud_oefening)
+            loadPrestatieData(id)
         })
     }
 }
