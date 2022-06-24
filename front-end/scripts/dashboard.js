@@ -329,12 +329,30 @@ const loadPrestaties = async () => {
             prestaties = json.prestaties
             
             let x = ''
-            x += `<tr><th>Gebruiker</td><th>OefeningID</th><th>Datum</th><th>Starttijd</th><th>Eindtijd</th><th>Reps</th><th></th><th></th></tr>`
+            x += `<tr><th>Gebruiker</td><th>Oefening</th><th>Datum</th><th>Starttijd</th><th>Eindtijd</th><th>Reps</th><th></th><th></th></tr>`
+
 
             prestaties.forEach((item, key) => {
-                x += `<tr><td>${item.userid}</td><td>${item.oefeningid}</td><td>${item.datum}</td><td>${item.starttijd}</td><td>${item.eindtijd}</td><td>${item.reps}</td><td style="color: red;" onclick="deleteprestatie(${item.id})">X</td><td><i onclick="goto('edit_prestatie', ${key})" class="fas fa-edit"></i></td></tr>`
+                let foundUser = null;
+                for (let key in allUsers) {
+                    if (allUsers[key].id === item.userid) {
+                        foundUser = allUsers[key];
+                        break;
+                    }
+                }
+
+                let foundOefening = null;
+                for (let key in oefeningen) {
+                    if (oefeningen[key].id === item.oefeningid) {
+                        foundOefening = oefeningen[key];
+                        break;
+                    }
+                }
+                let nonparsedtime = item.datum
+                let parsedtime = nonparsedtime.split('T')[0]
+                x += `<tr><td>${foundUser.username}</td><td>${foundOefening.name}</td><td>${parsedtime}</td><td>${item.starttijd}</td><td>${item.eindtijd}</td><td>${item.reps}</td><td style="color: red;" onclick="deleteprestatie(${item.id})">X</td><td><i onclick="goto('edit_prestatie', ${key})" class="fas fa-edit"></i></td></tr>`
             })
-            
+           
             $(".tabel-prestaties").html("")
             $(".tabel-prestaties").append(x)
         } else {
@@ -390,7 +408,6 @@ const addPrestatie = async () => {
 const editPrestatie = async () => {
     const userid = $("#edit-prestatie-user").val()
     const oefeningid = $("#edit-oefening").val()
-    const datum = $("#edit-datum").val()
     const starttijd    = $("#edit-starttijd").val()
     const eindtijd    = $("#edit-eindtijd").val()
     const reps    = $("#edit-reps").val()
@@ -408,7 +425,6 @@ const editPrestatie = async () => {
             body: JSON.stringify({
                 userid: userid,
                 oefeningid: oefeningid,
-                datum: datum,
                 starttijd: starttijd,
                 eindtijd: eindtijd,
                 reps: reps,
@@ -473,12 +489,10 @@ const loadPrestatieData = (id) => {
     let prestatie = prestaties[id]
     cur_prestatie = prestatie.id
 
-    let datum = new Date(prestatie.datum).toLocaleDateString('zh-Hans-CN');
 
 
     $("#edit-prestatie-user").val(prestatie.userid).change();
     $("#edit_oefening").val(prestatie.roleid).change();
-    $("#edit-datum").val(datum);
     $("#edit-starttijd").val(prestatie.starttijd);
     $("#edit-eindtijd").val(prestatie.eindtijd);
     $("#edit-reps").val(prestatie.reps);
