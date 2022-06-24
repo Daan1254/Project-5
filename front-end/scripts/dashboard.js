@@ -12,6 +12,31 @@ const load = async (name) => {
     $(".gebruiker-count").html(allUsers.length)
     $(".loginname").html(name)
 }
+
+const generateQRCode = (url) => {
+    if (url) {
+        let qrcodeContainer = document.getElementById("qrcode");
+        qrcodeContainer.innerHTML = "";
+        new QRCode(qrcodeContainer, url);
+        document.getElementById("qrcode-container").style.display = "block";
+    } else {
+        alert("Er is iets fout gegaan!");
+    }
+    $(`.${last_page}`).fadeOut(250, () => {
+        $(".dashboard-QR-inner").fadeIn(250)
+        last_page = "dashboard-QR-inner"
+
+    })
+}
+
+function printContent(el){
+    let restorepage = $('body').html();
+    let printcontent = $('#' + el).clone();
+    $('body').empty().html(printcontent);
+    window.print();
+    $('body').html(restorepage);
+}
+
 const loadExercises = async () => {
     try {
         const response = await fetch("http://node7.consulhosting.nl:24187/oefeningen", {
@@ -29,7 +54,7 @@ const loadExercises = async () => {
     
             let x = ``
             oefeningen.forEach((item , key) => {
-                x += `<div class="exercise-item"><img src="${item.picture}" alt=""><div class="exercise-detail-container"><div class="exercise-title">${item.name}</div><div class="exercise-description">${item.description}</div><div class="exercise-btn-container"><div class="exercise-btn edit-btn" onclick="edit(${item.id}, ${key})">Wijzigen</div><div class="exercise-btn delete-btn" onclick="del(${item.id})">Verwijderen</div></div></div></div>`
+                x += `<div class="exercise-item"><img src="${item.picture}" alt=""><div class="exercise-detail-container"><div class="exercise-title">${item.name}</div><div class="exercise-description">${item.description}</div><div class="exercise-btn-container"><div class="exercise-btn edit-btn" onclick="edit(${item.id}, ${key})">Wijzigen</div><div class="exercise-btn delete-btn" onclick="del(${item.id})">Verwijderen</div><div class="exercise-btn QR-btn" onclick="generateQRCode('http://node7.consulhosting.nl:24187/oefeningen/' + ${item.id})">QR Genereren</div></div></div></div>`
             })
             $(".dashboard-oefeningen-grid").html("")
             $(".dashboard-oefeningen-grid").append(x)

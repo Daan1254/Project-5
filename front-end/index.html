@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://cdn.rawgit.com/davidshimjs/qrcodejs/gh-pages/qrcode.min.js"></script>
 </head>
 <body>
     <div class='container'>
@@ -264,6 +265,17 @@
                             <div class="add-btn-user"onclick="editPrestatie()">PRESTATIE WIJZIGEN</div>
                         </div>
                    </div>
+                <div class="dashboard-QR-inner" style="display: none;">
+                    <div class="dashboard-QR">
+                        <div class="qrcode-text">
+                            Hieronder vindt u de QR die<br>u doorverwijst!<br><br><b>Scan deze met de QR scanner in de app!</b>
+                        </div>
+                        <div id="qrcode-container">
+                            <div id="qrcode" class="qrcode"></div>
+                        </div>
+                    </div>
+                    <div class="print-qr" onclick="printContent('qrcode-container')">Print de QR</div>
+                </div>
         </div>
        
     </div>
