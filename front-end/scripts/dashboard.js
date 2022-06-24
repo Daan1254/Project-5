@@ -1,4 +1,17 @@
 let oefeningen;
+let allUsers;
+let prestaties;
+
+const load = async (name) => {
+    await loadExercises()
+    await loadPrestaties()
+    await loadUsers()
+
+    $(".oefening-count").html(oefeningen.length)
+    $(".prestaties-count").html(prestaties.length)
+    $(".gebruiker-count").html(allUsers.length)
+    $(".loginname").html(name)
+}
 const loadExercises = async () => {
     try {
         const response = await fetch("http://node7.consulhosting.nl:24187/oefeningen", {
@@ -13,7 +26,6 @@ const loadExercises = async () => {
             const json = await response.json(); 
             acces_token = json.acces_token
             oefeningen = json.oefeningen
-            $(".oefening-count").html(oefeningen.length)
     
             let x = ``
             oefeningen.forEach((item , key) => {
@@ -234,8 +246,6 @@ const loadRoles = async () => {
     
 }
 
-let allUsers;
-
 const loadUsers = async () => {
     try {
         await loadRoles();
@@ -307,8 +317,6 @@ const addUser = async () => {
         console.log(e)
     }
 }
-
-let prestaties;
 
 const loadPrestaties = async () => {
     try {
@@ -554,14 +562,12 @@ const goto = (goto, id) => {
             $(".dashboard-oefeningen").fadeIn(250)
             last_page = "dashboard-oefeningen"
             console.log(last_page)
-            loadExercises()
         })
     }
     else if (goto == 'gebruikers') {
         $(`.${last_page}`).fadeOut(250, () => {
             $(".dashboard-gebruikers").fadeIn(250)
             last_page = "dashboard-gebruikers"
-            loadUsers()
         })
     } else if (goto == 'new_user') {
         $(`.${last_page}`).fadeOut(250, () => {
@@ -587,7 +593,6 @@ const goto = (goto, id) => {
         $(`.${last_page}`).fadeOut(250, () => {
             $(".dashboard-prestaties").fadeIn(250)
             last_page = 'dashboard-prestaties'
-            loadPrestaties()
         })
     }
     else if (goto == 'new_prestatie') {

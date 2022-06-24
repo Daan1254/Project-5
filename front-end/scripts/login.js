@@ -11,7 +11,7 @@ $(".btn").click(() => {
             notify("succes", "Login succes", 5000)
             $(".container").fadeOut(250, () => {
                 $(".dashboard-container").fadeIn(250)
-                loadExercises()
+                load(username)
             })
         } else {
             notify('error', "Login gefaald", 2500)
