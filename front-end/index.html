@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://cdn.rawgit.com/davidshimjs/qrcodejs/gh-pages/qrcode.min.js"></script>
 </head>
 <body>
     <div class='container'>
@@ -55,18 +56,35 @@
                         <i class="fas fa-user"></i>
                         Gebruikers
                     </div>
-                    <div class="sidebar-item" onclick="goto('instellingen')">
+                    <div class="sidebar-item" onclick="goto('prestaties')">
+                        <i class="fas fa-trophy"></i>
+                        Prestaties
+                    </div>
+                    <!-- <div class="sidebar-item" onclick="goto('instellingen')">
                         <i class="fas fa-cog"></i>
                         Instellingen
-                    </div>
+                    </div> -->
                 </div>
             </div>
     
-            <div  class="dashboard-home">
-                    <div class="oefeningen-count">
-                        AANTAL OEFENINGEN <br> <span class="oefening-count">1</span>
-                    </div>
+            <div class="dashboard-home">
+                <div class="ingelogdals">
+                    JE BENT INGELOGD ALS: <br><span class="loginname">Username</span>
+                </div>
+                <div class="dashboard-home-flex">
+                        <div class="oefeningen-count">
+                            AANTAL OEFENINGEN <br> <span class="oefening-count">1</span>
+                        </div>
+                        <div class="oefeningen-count">
+                            AANTAL GEBRUIKERS <br> <span class="gebruiker-count">1</span>
+                        </div>
+                        <div class="oefeningen-count">
+                            AANTAL PRESTATIES <br> <span class="prestaties-count">1</span>
+                        </div>
+                </div>
+                <div class="logout-btn"><a href="javascript:window.location.reload(true)">Uitloggen</a></div>
             </div>
+            
 
             <div style="display: none;"  class="dashboard-oefeningen">
                 <div class="dashboard-oefeningen-grid">
@@ -152,7 +170,7 @@
 
             <div style="display: none;" class="dashboard-edit-gebruikers">
                 <div class="dashboard-add-container">
-                    <div class="dashboard-add-title">NIEUWE GEBRUIKER</div>
+                    <div class="dashboard-add-title">GEBRUIKER WIJZIGEN</div>
                     <div class='add-input-container'>
                         <label class='input-label'>Username <span class='input-required'>*</span> </label>
                         <input id="edit-user" type="text" placeholder="Username..." class="Input"/>
@@ -172,10 +190,92 @@
                             <option value="2">Gebruiker</option>
                         </select>
                     </div>
-
                     <div class="add-btn-user"onclick="editUser()">USER TOEVOEGEN</div>
                 </div>
-            </div>
+                </div>
+
+                <div style="display: none;" class="dashboard-prestaties">
+                    <table class="tabel-prestaties">
+                    
+                    </table>
+                    <div class="add-user-btn" onclick="goto('new_prestatie')">NIEUWE PRESTATIE AANMAKEN</div>
+                </div>
+                
+                <div style="display: none;" class="dashboard-add-prestaties">
+                    <div class="dashboard-add-container">
+                        <div class="dashboard-add-title">PRESTATIE TOEVOEGEN</div>
+                        <div class='add-input-container'>
+                            <label class='input-label'>Gebruiker <span class='input-required'>*</span> </label>
+                            <select name="user_prestatie" id="add-prestatie-user">
+                                
+                            </select>
+                        </div>
+                        <div class='add-input-container'>
+                            <label class='input-label'>Oefening<span class='input-required'>*</span> </label>
+                            <select name="user_prestatie" id="add-oefening">
+                                </select>
+                        </div>
+                        
+                        <div class='add-input-container'>
+                            <label class='input-label'>Datum <span class='input-required'>*</span> </label>
+                            <input id="add-datum" type="date" placeholder="Datum..." class="Input"/>
+                        </div>
+                        <div class='add-input-container'>
+                            <label class='input-label'>Starttijd <span class='input-required'>*</span> </label>
+                            <input id="add-starttijd" type="time" placeholder="Starttijd..." class="Input"/>
+                        </div>
+                        <div class='add-input-container'>
+                            <label class='input-label'>Eindtijd <span class='input-required'>*</span> </label>
+                            <input id="add-eindtijd" type="time" placeholder="Eindtijd..." class="Input"/>
+                        </div>
+                        <div class='add-input-container'>
+                            <label class='input-label'>Reps <span class='input-required'>*</span> </label>
+                            <input id="add-reps" type="number" placeholder="Reps..." class="Input"/>
+                        </div>
+                        <div class="add-btn-user" onclick="addPrestatie()">PRESTATIE TOEVOEGEN</div>
+                    </div>
+                </div>
+               
+                    <div style="display: none;" class="dashboard-edit-prestaties">
+                        <div class="dashboard-add-container">
+                            <div class="dashboard-add-title">PRESTATIE WIJZIGEN</div>
+                            <div class='add-input-container'>
+                                <label class='input-label'>Gebruiker <span class='input-required'>*</span> </label>
+                                <select name="edit_user_prestatie" id="edit-prestatie-user">
+                                    
+                                </select>
+                            </div>
+                            <div class='add-input-container'>
+                                <label class='input-label'>Oefening<span class='input-required'>*</span> </label>
+                                <select name="edit_user_prestatie" id="edit-oefening">
+                                    </select>
+                            </div>
+                            <div class='add-input-container'>
+                                <label class='input-label'>Starttijd <span class='input-required'>*</span> </label>
+                                <input id="edit-starttijd" type="time" placeholder="Starttijd..." class="Input"/>
+                            </div>
+                            <div class='add-input-container'>
+                                <label class='input-label'>Eindtijd <span class='input-required'>*</span> </label>
+                                <input id="edit-eindtijd" type="time" placeholder="Eindtijd..." class="Input"/>
+                            </div>
+                            <div class='add-input-container'>
+                                <label class='input-label'>Reps <span class='input-required'>*</span> </label>
+                                <input id="edit-reps" type="number" placeholder="Reps..." class="Input"/>
+                            </div>
+                            <div class="add-btn-user"onclick="editPrestatie()">PRESTATIE WIJZIGEN</div>
+                        </div>
+                   </div>
+                <div class="dashboard-QR-inner" style="display: none;">
+                    <div class="dashboard-QR">
+                        <div class="qrcode-text">
+                            Hieronder vindt u de QR die<br>u doorverwijst!<br><br><b>Scan deze met de QR scanner in de app!</b>
+                        </div>
+                        <div id="qrcode-container">
+                            <div id="qrcode" class="qrcode"></div>
+                        </div>
+                    </div>
+                    <div class="print-qr" onclick="printContent('qrcode-container')">Print de QR</div>
+                </div>
         </div>
        
     </div>

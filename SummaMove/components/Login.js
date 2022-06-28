@@ -1,9 +1,10 @@
 import { StatusBar } from "expo-status-bar";
 import React, { useEffect, useState } from "react";
-import { StyleSheet, Text, View, Button, Alert } from "react-native";
+import { StyleSheet, Text, View, Button, Alert, Image, Pressable } from "react-native";
 import { TextInput } from "react-native-gesture-handler";
 import { TouchableOpacity } from "react-native-web";
 import { getCurrentToken, setToken, setUser } from "./Authorizartion";
+import { getLocals, setLocal } from "./Localization";
 
 const App = ({ route, navigation }) => {
   const [username, setusername] = useState("");
@@ -36,10 +37,13 @@ const App = ({ route, navigation }) => {
   getCurrentToken((token) => {
     console.log(token)
   })
+
+
+  let Locals = getLocals()
   return (
     <View style={styles.container}>
       <View>
-        <Text style={styles.title}>Welkom!</Text>
+        <Text style={styles.title}>{Locals.welcome_msg}</Text>
         <TextInput
           style={styles.input}
           onChangeText={(text) => setusername(text)}
@@ -51,26 +55,50 @@ const App = ({ route, navigation }) => {
           placeholder="Password"
         ></TextInput>
         <Button
-          title="Login"
+          title={Locals.lgn_btn_text}
           color="#7a42f4"
           onPress={() => {
             login(navigation);
           }}
         />
-        <Text style={styles.gray}>Heb je nog geen account?</Text>
+        <Text style={styles.gray}>{Locals.noAccount}</Text>
         <Button
-          title="Register"
+          title={Locals.register}
           color="#7a42f4"
           onPress={() => {
             navigation.navigate("Registerscreen");
           }}
         />
-        <Text style={styles.gray}>Ga verder als gast zonder account</Text>
+        <Text style={styles.gray}>{Locals.futherAsGuest}</Text>
         <Button
-          title="Ga verder"
+          title={Locals.lgn_go}
           color="#7a42f4"
           onPress={() => Alert.alert("Button with adjusted color pressed")}
         />
+        <Button
+          title={Locals.select_lang}
+          color="#7a42f4"
+          
+        />
+        <View style={styles.flagContainer}>
+          <Image
+            source={{uri: "https://cdn.discordapp.com/attachments/991239131726360657/991239174407589949/NL.png"}}
+            style={styles.flag}
+
+          />
+          <Pressable 
+                      onPress={() => {
+              setLocal("NL")
+              Locals = getLocals()
+            }}>
+          <Image
+            source={{uri: "https://cdn.discordapp.com/attachments/991239131726360657/991239174629904424/ENG.png"}}
+            style={styles.flag}
+            onPress={() => {setLocal("ENG")}}
+          />
+          </Pressable>
+
+        </View>
       </View>
     </View>
   );
@@ -103,5 +131,15 @@ const styles = StyleSheet.create({
     marginTop: 25,
     textAlign: "center",
   },
+  flagContainer: {
+    width: 252,
+    display: 'flex',
+    justifyContent: "space-evenly",
+    flexDirection: 'row'
+  },
+  flag: {
+    width: 35,
+    height: 25
+  }
 });
 export default App;
