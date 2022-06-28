@@ -14,6 +14,7 @@ import Login from "./components/Login";
 import Register from "./components/Register";
 import Home from "./components/Home";
 import Workout from "./components/Workout";
+import QRscan from "./components/QRScan";
 
 const App = () => {
   return (
@@ -26,10 +27,24 @@ const App = () => {
         <Stack.Screen component={Register} name="Registerscreen"></Stack.Screen>
         <Stack.Screen component={Home} name="Homescreen"></Stack.Screen>
         <Stack.Screen component={Workout} name="Workout"></Stack.Screen>
+        <Stack.Screen component={QRScanStack} name="QRScan"></Stack.Screen>
       </Stack.Navigator>
     </NavigationContainer>
   );
 };
+const QRScanStack = () => {
+  return (
+    <Stack.Navigator
+    screenOptions={{
+      headerShown: false
+    }}>
+    <Stack.Screen
+    name='QR-Scanner'
+    component={QRscan}/>
+    </Stack.Navigator>
+  )
+}
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,

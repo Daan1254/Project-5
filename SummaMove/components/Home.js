@@ -62,6 +62,9 @@ const App = ({ route, navigation }) => {
 
   return (
     <View style={styles.container}>
+      <Button onPress={() => {
+                navigation.navigate("QRScan");
+              }} title="Scan een QR code"></Button>
       <Text style={{fontSize: 25, textAlign: "center",}}>Wat gaan we vandaag trainen,</Text>
       <Text style={{fontSize: 25, textAlign: "center",}}>{route.params.username}?</Text>
       {isLoading ? (
