@@ -54,11 +54,7 @@ const loadExercises = async () => {
     
             let x = ``
             oefeningen.forEach((item , key) => {
-<<<<<<< HEAD
-                x += `<div class="exercise-item"><img src="${item.picture}" alt=""><div class="exercise-detail-container"><div class="exercise-title">${item.name}</div><div class="exercise-description">${item.description}</div><div class="exercise-btn-container"><div class="exercise-btn edit-btn" onclick="edit(${item.id}, ${key})">Wijzigen</div><div class="exercise-btn delete-btn" onclick="del(${item.id})">Verwijderen</div></div><div class="qr-icon"><i onclick="createQR(${key})" class="fas fa-qrcode"></i></div></div></div>`
-=======
-                x += `<div class="exercise-item"><img src="${item.picture}" alt=""><div class="exercise-detail-container"><div class="exercise-title">${item.name}</div><div class="exercise-description">${item.description}</div><div class="exercise-btn-container"><div class="exercise-btn edit-btn" onclick="edit(${item.id}, ${key})">Wijzigen</div><div class="exercise-btn delete-btn" onclick="del(${item.id})">Verwijderen</div><div class="exercise-btn QR-btn" onclick="generateQRCode('http://node7.consulhosting.nl:24187/oefeningen/' + ${item.id})">QR Genereren</div></div></div></div>`
->>>>>>> 0937eeeea525238d23762c1b2e06fdc6286fe257
+                x += `<div class="exercise-item"><img src="${item.picture}" alt=""><div class="exercise-detail-container"><div class="exercise-title">${item.name}</div><div class="exercise-description">${item.description}</div><div class="exercise-btn-container"><div class="exercise-btn edit-btn" onclick="edit(${item.id}, ${key})">Wijzigen</div><div class="exercise-btn delete-btn" onclick="del(${item.id})">Verwijderen</div><div class="exercise-btn QR-btn" onclick="generateQRCode('' + ${item.spiergroepid})">QR Genereren</div></div></div></div>`
             })
             $(".dashboard-oefeningen-grid").html("")
             $(".dashboard-oefeningen-grid").append(x)
