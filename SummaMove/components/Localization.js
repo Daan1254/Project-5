@@ -6,7 +6,9 @@ const Locals = {
         futherAsGuest : "Ga verder als gast zonder account",
         lgn_go        : "Ga Verder",
         lgn_btn_text  : "Inloggen",
-        select_lang   : "Selecteer Taal"
+        select_lang   : "Selecteer Taal",
+        what_todo     : "Wat gaan we vandaag trainen?,",
+        scan_qr       : "Scan een QR code"
     }, 
      
     ENG : { 
@@ -16,8 +18,9 @@ const Locals = {
         futherAsGuest : "Login without an account",
         lgn_go        : "Next",
         lgn_btn_text  : "Login",
-        select_lang   : "Select your Language"
-
+        select_lang   : "Select your Language",
+        what_todo     : "What are we training today,",
+        scan_qr       : "Scan a QR code"
     },
 }
 

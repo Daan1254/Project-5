@@ -13,17 +13,17 @@ import {
 import { TextInput } from "react-native-gesture-handler";
 import { TouchableOpacity } from "react-native-web";
 import { getCurrentToken, setToken, getUser } from "./Authorizartion";
+import { getLocals } from "./Localization";
 
 import Oefening from "./oefening";
 const App = ({ route, navigation }) => {
 
-  // console.log(route.params);
   let AccessToken;
   getCurrentToken((token) => {
-    // console.log("got:" + token)
     AccessToken = token;
   });
   
+  const [Locals, setLocals] = useState({});
   const [isLoading, setLoading] = React.useState(true);
   const [oefeningen, setOefeningen] = React.useState([]);
   const url = "http://node7.consulhosting.nl:24187/spiergroepen"
@@ -45,7 +45,6 @@ const App = ({ route, navigation }) => {
         setToken(json.acces_token);
         AccessToken = getCurrentToken()
         setOefeningen(json.oefeningen);
-        console.log(json.oefeningen[1].id);
         // console.log(json.oefeningen);
       } else {
         console.log("geen authorization")
@@ -60,12 +59,18 @@ const App = ({ route, navigation }) => {
     getJobs();
   }, [url]);
 
+  if (!Locals.welcome_msg) {
+    let x = getLocals()
+    setLocals(x)
+  }
+
+
   return (
     <View style={styles.container}>
       <Button onPress={() => {
                 navigation.navigate("QRScan");
-              }} title="Scan een QR code"></Button>
-      <Text style={{fontSize: 25, textAlign: "center",}}>Wat gaan we vandaag trainen,</Text>
+              }} title={Locals.scan_qr}></Button>
+      <Text style={{fontSize: 25, textAlign: "center",}}>{Locals.what_todo}</Text>
       <Text style={{fontSize: 25, textAlign: "center",}}>{route.params.username}?</Text>
       {isLoading ? (
         <ActivityIndicator />
