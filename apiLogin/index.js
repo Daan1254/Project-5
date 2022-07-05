@@ -56,6 +56,8 @@ app.get("/spiergroepen", authenticateToken, (req, res) => {
   })
 })
 
+
+
 app.get("/users", authenticateToken, (req, res) => {
   db.query("SELECT * FROM users", async (err, result) => {
     if (err) throw err;
