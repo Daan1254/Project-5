@@ -73,7 +73,7 @@ const createQR = async (key) => {
     console.log(oefeningen[key])
     window.open(
         `https://chart.googleapis.com/chart?chs=200x200&cht=qr&chl='title: ${oefeningen[key].name} description: ${oefeningen[key].description}'&choe=UTF-8`,
-        '_blank' // <- This is what makes it open in a new window.
+        '_blank'
       );
 }
 
@@ -170,7 +170,6 @@ const confirmChanges = async () => {
     let imgSource = $(".dashboard-edit-srcChanger").val()
 
     try {
-        console.log(acces_token)
         let response = await fetch("http://node7.consulhosting.nl:24187/oefeningen/edit/" + edit_id, {
             method: "PUT",
             headers: {
@@ -583,7 +582,6 @@ const editUser = async () => {
 }
 
 const goto = (goto, id) => {
-    console.log(goto)
     if (goto == 'home') {
         console.log(last_page)
         $(`.${last_page}`).fadeOut(250, () => {
