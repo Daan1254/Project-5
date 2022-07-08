@@ -60,7 +60,7 @@ const App = ({ route, navigation }) => {
           <ActivityIndicator />
         ) : (
           <>
-<Text style={styles.title}>{Locals.welcome_msg}</Text>
+          <Text style={styles.title}>{Locals.welcome_msg}</Text>
           <TextInput
             style={styles.input}
             onChangeText={(text) => setusername(text)}
@@ -127,62 +127,7 @@ const App = ({ route, navigation }) => {
 
 };
 
-{/* <Text style={styles.title}>{Locals.welcome_msg}</Text>
-          <TextInput
-            style={styles.input}
-            onChangeText={(text) => setusername(text)}
-            placeholder="Username"
-          ></TextInput>
-          <TextInput
-            style={styles.input}
-            onChangeText={(text) => setPassword(text)}
-            placeholder="Password"
-          ></TextInput>
-          <Button
-            title={Locals.lgn_btn_text}
-            color="#7a42f4"
-            onPress={() => {
-              login(navigation);
-            }}
-          />
-          <Text style={styles.gray}>{Locals.noAccount}</Text>
-          <Button
-            title={Locals.register}
-            color="#7a42f4"
-            onPress={() => {
-              navigation.navigate("Registerscreen");
-            }}
-          />
-          <Text style={styles.gray}>{Locals.futherAsGuest}</Text>
-          <Button
-            title={Locals.lgn_go}
-            color="#7a42f4"
-            onPress={() => Alert.alert("Button with adjusted color pressed")}
-          />
-          <Button
-            title={Locals.select_lang}
-            color="#7a42f4"
-            
-          />
-          <View style={styles.flagContainer}>
-            <Pressable onPress={() => {setLanguage("NL")}}>
-            <Image
-              source={{uri: "https://cdn.discordapp.com/attachments/991239131726360657/991239174407589949/NL.png"}}
-              style={styles.flag}
 
-            />
-            </Pressable>
-            <Pressable 
-                        onPress={() => {
-                setLanguage("ENG")
-              }}>
-            <Image
-              source={{uri: "https://cdn.discordapp.com/attachments/991239131726360657/991239174629904424/ENG.png"}}
-              style={styles.flag}
-            />
-            </Pressable>
-
-          </View> */}
 const styles = StyleSheet.create({
   container: {
     flex: 1,
